@@ -8,7 +8,7 @@ candidatos = [
 
 # Percorrendo a lista e classificando candidatos
 
-def classificar_candi(candidatos):
+def classificar_candidatos(candidatos):
     if candidatos >= 90:
         return "Excelente"
     elif candidatos >= 75:
@@ -28,5 +28,26 @@ print(f"\nMédia de notas: {media:,.1f}")
 
 
 for c in candidatos:
-    classificacao = classificar_candi(c['nota'])
+    classificacao = classificar_candidatos(c['nota'])
     print(f"{c['nome']}: classificacao: {classificacao}")
+
+
+#MAIOR NOTA
+maior_nota = candidatos[0]
+for nota in candidatos:
+    if nota['nota'] > maior_nota['nota']:
+        maior_nota = nota
+print(f"Maior nota: {maior_nota['nome']} com {maior_nota['nota']:,.1f}")
+
+
+#TOTAL DE CANDIDATOS COM INCLUSÃO
+candidatos.append({"nome": "Lucas Rocha", "idade": 24, "experiencia": 1, "nota": 81.0})
+print(f"\nTotal de candidatos: {len(candidatos)}")
+
+
+# Candidatos recomendados
+candidatos_recomendados = [0];
+for recom in candidatos:
+    if candidatos['nota'] >= 60:
+        candidatos_recomendados += 1
+print(f"\nTotal de candidatos recomendados: {candidatos_recomendados}")
