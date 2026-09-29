@@ -46,8 +46,8 @@ print(f"\nTotal de candidatos: {len(candidatos)}")
 
 
 # Candidatos recomendados
-candidatos_recomendados = [0];
+candidatos_recomendados = 0
 for recom in candidatos:
-    if candidatos['nota'] >= 60:
+    if recom['nota'] >= 60 and recom['experiencia'] >= 1 and len(recom['nome']) > 5:
         candidatos_recomendados += 1
 print(f"\nTotal de candidatos recomendados: {candidatos_recomendados}")
