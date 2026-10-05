@@ -17,28 +17,35 @@ def classificar_candidatos(candidatos):
         return "regular"
     else:
         return "Reprovado"
-        
+
+    for candidato in candidatos:
+        classificacao = classificar_candidatos(c['nota'])
+        print(f"{c['nome']}: classificacao: {classificacao}")
+
+
 # Percorrendo a lista e imprimindo a média
 
-total = 0
-for m in candidatos:
-    total += m["nota"]
-media = total / len(candidatos)
+def media_candidatos(candidatos):
+    total = 0
+    for m in candidatos:
+        total += m['nota']
+    return total/ len(candidatos)
+
+media = media_candidatos(candidatos)
 print(f"\nMédia de notas: {media:,.1f}")
 
 
-for c in candidatos:
-    classificacao = classificar_candidatos(c['nota'])
-    print(f"{c['nome']}: classificacao: {classificacao}")
-
 
 #MAIOR NOTA
-maior_nota = candidatos[0]
-for nota in candidatos:
-    if nota['nota'] > maior_nota['nota']:
-        maior_nota = nota
-print(f"Maior nota: {maior_nota['nome']} com {maior_nota['nota']:,.1f}")
 
+def encontrar_maior_nota(candidatos):
+    maior_nota = candidatos[0]
+    for candidato in candidatos:
+        if candidato['nota'] > maior_nota['nota']:
+            maior_nota = candidato
+    print(f"Maior nota: {maior_nota['nome']} com {maior_nota['nota']:,.1f}")
+
+encontrar_maior_nota(candidatos)
 
 #TOTAL DE CANDIDATOS COM INCLUSÃO
 candidatos.append({"nome": "Lucas Rocha", "idade": 24, "experiencia": 1, "nota": 81.0})
