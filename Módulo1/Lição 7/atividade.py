@@ -10,6 +10,7 @@ candidatos = [
 # Percorrendo a lista e classificando candidatos
 
 def classificar_candidatos(candidatos):
+    resultado = []
     for candidato in candidatos:
         nota = candidato['nota']
 
@@ -18,20 +19,26 @@ def classificar_candidatos(candidatos):
         elif nota >= 75:
             classificacao = "Bom"
         elif nota >= 60:
-            classificacao = "regular"
+            classificacao = "Regular"
         else:
             classificacao = "Reprovado"
-        
-        print(f"{candidato['nome']}: classificação: {classificacao}")
-        
+
+        resultado.append({"Nome": candidato['nome'],
+                          "Nota": nota,
+                          "Classificação": classificacao})
+
+    return resultado
+
+
+
 # Candidatos recomendados
 def contar_recomendados(candidatos):
     candidatos_recomendados = 0
     for candidato in candidatos:
         if candidato['nota'] >= 60 and candidato['experiencia'] >= 1 and len(candidato['nome']) > 5:
             candidatos_recomendados += 1
-    print(f"\nTotal de candidatos recomendados: {candidatos_recomendados}")
 
+    return candidatos_recomendados
 
 # Percorrendo a lista e imprimindo a média
 
@@ -40,10 +47,8 @@ def media_candidatos(candidatos):
     for candidato in candidatos:
         total += candidato['nota']
     media = total/ len(candidatos)
-    
-    print(f"\nMédia de notas: {media:,.1f}")
 
-    return media 
+    return media
 
 #MAIOR NOTA
 
@@ -52,15 +57,36 @@ def encontrar_maior_nota(candidatos):
     for candidato in candidatos:
         if candidato['nota'] > maior_nota['nota']:
             maior_nota = candidato
-    print(f"Maior nota: {maior_nota['nome']} com {maior_nota['nota']:,.1f}")
 
 
-#Bloco principal
-classificar_candidatos(candidatos)
-media_candidatos(candidatos)
-encontrar_maior_nota(candidatos)
-contar_recomendados(candidatos)
+    return maior_nota
 
+# =========================
+# BLOCO PRINCIPAL
+# =========================
+
+
+# Classificação de todos os candidatos
+
+resultado = classificar_candidatos(candidatos)
+
+for recomendado in resultado:
+    print(f"{recomendado['Nome']}: {recomendado['Classificação']}")
+
+# Media total dos candidatos
+
+media = media_candidatos(candidatos)
+print(f"\nMédia de notas: {media:,.1f}")
+
+# Contar a quantidade recomendada
+
+recomendado = contar_recomendados(candidatos)
+print(f"\nTotal de candidatos recomendados: {recomendado}")
+
+# Econtrar a maior nota
+
+maior_nota = encontrar_maior_nota(candidatos)
+print(f"Maior nota: {maior_nota['nome']} com {maior_nota['nota']:,.1f}")
 
 #TOTAL DE CANDIDATOS COM INCLUSÃO
 candidatos.append({"nome": "Lucas Rocha", "idade": 24, "experiencia": 1, "nota": 81.0})
